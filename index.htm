@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <!-- MOBILE TOP HEADER (Visible only on phones/tablets) -->
+    <!-- MOBILE TOP HEADER -->
     <header class="mobile-topbar">
         <button class="menu-toggle-btn" onclick="toggleMobileSidebar()" aria-label="Open Menu">
             <i class="fa-solid fa-bars"></i>
@@ -19,7 +19,7 @@
         <h1 class="mobile-brand">DEEPFAKE DETECTIVE</h1>
     </header>
 
-    <!-- SIDEBAR OVERLAY (Dims background when mobile menu is open) -->
+    <!-- SIDEBAR OVERLAY -->
     <div class="sidebar-overlay" onclick="toggleMobileSidebar()"></div>
 
     <!-- SIDEBAR NAVIGATION -->
@@ -36,16 +36,19 @@
             <div class="menu-category">Education</div>
             <li class="menu-item" onclick="switchSection('ai-hub')">
                 <i class="fa-solid fa-robot"></i><span>Understanding AI</span>
+                <i class="fa-solid fa-chevron-right menu-indicator"></i>
             </li>
 
             <div class="menu-category">Analysis</div>
             <li class="menu-item" onclick="switchSection('risks-hub')">
                 <i class="fa-solid fa-triangle-exclamation"></i><span>Risks & Impact</span>
+                <i class="fa-solid fa-chevron-right menu-indicator"></i>
             </li>
 
             <div class="menu-category">Practice</div>
             <li class="menu-item" onclick="switchSection('spot-hub')">
                 <i class="fa-solid fa-magnifying-glass"></i><span>Spot the Fake</span>
+                <i class="fa-solid fa-chevron-right menu-indicator"></i>
             </li>
 
             <li class="menu-item" onclick="switchSection('quiz')">
@@ -55,6 +58,7 @@
             <div class="menu-category">Community</div>
             <li class="menu-item" onclick="switchSection('survey-hub')">
                 <i class="fa-solid fa-chart-bar"></i><span>Field Survey</span>
+                <i class="fa-solid fa-chevron-right menu-indicator"></i>
             </li>
 
             <li class="menu-item" onclick="switchSection('awareness')">
@@ -79,14 +83,17 @@
                 <div class="card" onclick="switchSection('ai-hub')">
                     <h3><i class="fa-solid fa-robot"></i> Understand AI</h3>
                     <p>Learn how machine learning models generate hyper-realistic audio, video, and imagery.</p>
+                    <span class="card-link-text">Explore Topics <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
                 <div class="card" onclick="switchSection('spot-hub')">
                     <h3><i class="fa-solid fa-magnifying-glass"></i> Spot the Fake</h3>
                     <p>Put your observational skills to the test with interactive detection mini-challenges.</p>
+                    <span class="card-link-text">Take Challenge <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
                 <div class="card" onclick="switchSection('quiz')">
                     <h3><i class="fa-solid fa-brain"></i> Test Your Knowledge</h3>
                     <p>Take our curated quizzes to evaluate your digital literacy and security preparedness.</p>
+                    <span class="card-link-text">Start Quiz <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
             </div>
         </section>
@@ -94,7 +101,7 @@
         <!-- ================= UNDERSTANDING AI HUB & TOPICS ================= -->
         <section id="ai-hub" class="content-section">
             <h2>Understanding AI</h2>
-            <p>Explore the core concepts behind artificial intelligence and how modern machine learning models construct synthetic media.</p>
+            <p>Explore the core concepts behind artificial intelligence and how modern machine learning models construct synthetic media. Click any topic below to read more:</p>
             <div class="card-grid">
                 <div class="card" onclick="switchSection('what-is-ai')">
                     <h3><i class="fa-solid fa-file-lines"></i> What is AI-Generated Content?</h3>
@@ -149,7 +156,7 @@
         <!-- ================= RISKS & IMPACT HUB & TOPICS ================= -->
         <section id="risks-hub" class="content-section">
             <h2>Risks & Impact</h2>
-            <p>Examine the societal, political, and financial dangers posed by synthetic media and deepfake technology.</p>
+            <p>Examine the societal, political, and financial dangers posed by synthetic media and deepfake technology. Select a topic below:</p>
             <div class="card-grid">
                 <div class="card" onclick="switchSection('misinformation')">
                     <h3><i class="fa-solid fa-bullhorn"></i> Misinformation</h3>

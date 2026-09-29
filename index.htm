@@ -11,8 +11,19 @@
 </head>
 <body>
 
+    <!-- MOBILE TOP HEADER (Visible only on phones/tablets) -->
+    <header class="mobile-topbar">
+        <button class="menu-toggle-btn" onclick="toggleMobileSidebar()" aria-label="Open Menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <h1 class="mobile-brand">DEEPFAKE DETECTIVE</h1>
+    </header>
+
+    <!-- SIDEBAR OVERLAY (Dims background when mobile menu is open) -->
+    <div class="sidebar-overlay" onclick="toggleMobileSidebar()"></div>
+
     <!-- SIDEBAR NAVIGATION -->
-    <aside>
+    <aside id="app-sidebar">
         <div class="sidebar-header">
             <i class="fa-solid fa-shield-halved"></i>
             <h1>DEEPFAKE<br>DETECTIVE</h1>

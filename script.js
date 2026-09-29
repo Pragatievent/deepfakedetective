@@ -11,7 +11,7 @@ function switchSection(sectionId) {
     const menuItems = document.querySelectorAll('.menu-item');
     menuItems.forEach(item => item.classList.remove('active'));
     
-    // Explicitly close mobile sidebar when navigating (instead of toggling)
+    // Explicitly close mobile sidebar when navigating
     if (window.innerWidth <= 1024) {
         const sidebar = document.getElementById('app-sidebar');
         sidebar.classList.remove('mobile-open');
@@ -21,7 +21,7 @@ function switchSection(sectionId) {
     window.scrollTo(0, 0);
 }
 
-// Mobile Hamburger Menu Toggle (Only used when clicking the ☰ button)
+// Mobile Hamburger Menu Toggle
 function toggleMobileSidebar() {
     const sidebar = document.getElementById('app-sidebar');
     sidebar.classList.toggle('mobile-open');

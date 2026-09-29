@@ -11,15 +11,17 @@ function switchSection(sectionId) {
     const menuItems = document.querySelectorAll('.menu-item');
     menuItems.forEach(item => item.classList.remove('active'));
     
-    // Automatically close mobile sidebar on selection
-    if (window.innerWidth <= 768) {
-        toggleMobileSidebar();
+    // Explicitly close mobile sidebar when navigating (instead of toggling)
+    if (window.innerWidth <= 1024) {
+        const sidebar = document.getElementById('app-sidebar');
+        sidebar.classList.remove('mobile-open');
+        document.body.classList.remove('sidebar-active');
     }
 
     window.scrollTo(0, 0);
 }
 
-// Mobile Hamburger Menu Toggle
+// Mobile Hamburger Menu Toggle (Only used when clicking the ☰ button)
 function toggleMobileSidebar() {
     const sidebar = document.getElementById('app-sidebar');
     sidebar.classList.toggle('mobile-open');

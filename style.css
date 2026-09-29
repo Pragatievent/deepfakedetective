@@ -121,6 +121,18 @@ aside {
     text-align: center;
 }
 
+.menu-indicator {
+    margin-left: auto;
+    font-size: 0.7rem;
+    opacity: 0.4;
+    transition: transform 0.2s;
+}
+
+.menu-item:hover .menu-indicator {
+    opacity: 1;
+    transform: translateX(2px);
+}
+
 /* MAIN CONTENT AREA */
 main {
     margin-left: var(--sidebar-width);
@@ -197,11 +209,24 @@ p {
     padding: 1.5rem;
     transition: transform 0.2s, border-color 0.2s;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card:hover {
     transform: translateY(-3px);
     border-color: var(--accent);
+}
+
+.card-link-text {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .challenge-slot-card {
@@ -302,8 +327,8 @@ p {
     font-size: 1rem;
 }
 
-/* ================= RESPONSIVE MOBILE VIEW ================= */
-@media (max-width: 768px) {
+/* ================= RESPONSIVE MOBILE VIEW (Up to 1024px) ================= */
+@media (max-width: 1024px) {
     .mobile-topbar {
         display: flex;
         align-items: center;

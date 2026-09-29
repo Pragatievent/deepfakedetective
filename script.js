@@ -54,6 +54,32 @@ function checkImageSlot(slotNumber, userChoice) {
     }
 }
 
+// Multi-Slot Video Challenge Verification Logic (3 Slots)
+const videoChallengeAnswers = {
+    1: 'fake', // Slot 1: CEO Press Conference (AI Fake)
+    2: 'real', // Slot 2: Live Weather Broadcast (Real)
+    3: 'fake'  // Slot 3: Celebrity Late-Night Interview (AI Fake)
+};
+
+const videoChallengeExplanations = {
+    1: 'Correct! 🎯 Notice the unnatural facial lighting and slight audio lip-sync delay.',
+    2: 'Correct! 🎯 This is an authentic broadcast with natural studio lighting and normal blinking.',
+    3: 'Correct! 🎯 The subject rarely blinks and the jawline shows subtle blending artifacts.'
+};
+
+function checkVideoSlot(slotNumber, userChoice) {
+    const feedbackEl = document.getElementById(`video-feedback-${slotNumber}`);
+    const correctAnswer = videoChallengeAnswers[slotNumber];
+
+    if (userChoice === correctAnswer) {
+        feedbackEl.style.color = 'var(--success)';
+        feedbackEl.innerHTML = videoChallengeExplanations[slotNumber];
+    } else {
+        feedbackEl.style.color = 'var(--danger)';
+        feedbackEl.innerHTML = 'Incorrect. ❌ Pay closer attention to blinking rates and lip-syncing!';
+    }
+}
+
 // Interactive Quiz Logic
 const quizData = [
     {

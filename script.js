@@ -11,7 +11,19 @@ function switchSection(sectionId) {
     const menuItems = document.querySelectorAll('.menu-item');
     menuItems.forEach(item => item.classList.remove('active'));
     
+    // Automatically close mobile sidebar on selection
+    if (window.innerWidth <= 768) {
+        toggleMobileSidebar();
+    }
+
     window.scrollTo(0, 0);
+}
+
+// Mobile Hamburger Menu Toggle
+function toggleMobileSidebar() {
+    const sidebar = document.getElementById('app-sidebar');
+    sidebar.classList.toggle('mobile-open');
+    document.body.classList.toggle('sidebar-active');
 }
 
 // Multi-Slot Image Challenge Verification Logic (3 Slots)

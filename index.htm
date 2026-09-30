@@ -230,10 +230,9 @@
             <div class="card-grid">
                 <!-- Slot 1 -->
                 <div class="card challenge-slot-card">
-                    <div class="mock-image-container">
-                        <i class="fa-solid fa-user-tie" style="font-size: 2.5rem; color: var(--accent);"></i>
-                        <p style="margin-top: 0.75rem; font-weight: 600;">Image 1: Executive Portrait</p>
-                    </div>
+                 <div class="mock-image-container" style="padding: 0; overflow: hidden;">
+                    <img src="Face.jpeg" alt="Executive Portrait" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                 </div>
                     <div class="button-group" style="justify-content: center; margin-bottom: 1rem;">
                         <button class="btn btn-success" onclick="checkImageSlot(1, 'real')">Real</button>
                         <button class="btn btn-danger" onclick="checkImageSlot(1, 'fake')">AI Fake</button>
@@ -243,9 +242,8 @@
 
                 <!-- Slot 2 -->
                 <div class="card challenge-slot-card">
-                    <div class="mock-image-container">
-                        <i class="fa-solid fa-mountain-sun" style="font-size: 2.5rem; color: var(--accent);"></i>
-                        <p style="margin-top: 0.75rem; font-weight: 600;">Image 2: Scenic Landscape</p>
+                    <div class="mock-image-container" style="padding: 0; overflow: hidden;">
+                        <img src="landscape.jpg" alt="Executive Portrait" style="width: 100%; height: 180px; object-fit: cover; display: block;">
                     </div>
                     <div class="button-group" style="justify-content: center; margin-bottom: 1rem;">
                         <button class="btn btn-success" onclick="checkImageSlot(2, 'real')">Real</button>
@@ -256,9 +254,8 @@
 
                 <!-- Slot 3 -->
                 <div class="card challenge-slot-card">
-                    <div class="mock-image-container">
-                        <i class="fa-solid fa-utensils" style="font-size: 2.5rem; color: var(--accent);"></i>
-                        <p style="margin-top: 0.75rem; font-weight: 600;">Image 3: Food Dish Closeup</p>
+                    <div class="mock-image-container" style="padding: 0; overflow: hidden;">
+                        <img src="food.jpg" alt="Executive Portrait" style="width: 100%; height: 180px; object-fit: cover; display: block;">
                     </div>
                     <div class="button-group" style="justify-content: center; margin-bottom: 1rem;">
                         <button class="btn btn-success" onclick="checkImageSlot(3, 'real')">Real</button>
@@ -278,9 +275,11 @@
             <div class="card-grid">
                 <!-- Video Slot 1 -->
                 <div class="card challenge-slot-card">
-                    <div class="mock-image-container">
-                        <i class="fa-solid fa-file-video" style="font-size: 2.5rem; color: var(--accent);"></i>
-                        <p style="margin-top: 0.75rem; font-weight: 600;">Video 1: CEO Press Conference</p>
+                    <div class="mock-image-container" style="padding: 0; overflow: hidden; background: #000;">
+                        <video controls style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                            <source src="trumpXputin.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                     <div class="button-group" style="justify-content: center; margin-bottom: 1rem;">
                         <button class="btn btn-success" onclick="checkVideoSlot(1, 'real')">Real</button>
@@ -291,9 +290,11 @@
 
                 <!-- Video Slot 2 -->
                 <div class="card challenge-slot-card">
-                    <div class="mock-image-container">
-                        <i class="fa-solid fa-file-video" style="font-size: 2.5rem; color: var(--accent);"></i>
-                        <p style="margin-top: 0.75rem; font-weight: 600;">Video 2: Live Weather Broadcast</p>
+                   <div class="mock-image-container" style="padding: 0; overflow: hidden; background: #000;">
+                        <video controls style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                            <source src="landscapvid.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                     <div class="button-group" style="justify-content: center; margin-bottom: 1rem;">
                         <button class="btn btn-success" onclick="checkVideoSlot(2, 'real')">Real</button>
@@ -304,9 +305,11 @@
 
                 <!-- Video Slot 3 -->
                 <div class="card challenge-slot-card">
-                    <div class="mock-image-container">
-                        <i class="fa-solid fa-file-video" style="font-size: 2.5rem; color: var(--accent);"></i>
-                        <p style="margin-top: 0.75rem; font-weight: 600;">Video 3: Celebrity Late-Night Interview</p>
+                    <div class="mock-image-container" style="padding: 0; overflow: hidden; background: #000;">
+                        <video controls style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                            <source src="Planeseat.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                     <div class="button-group" style="justify-content: center; margin-bottom: 1rem;">
                         <button class="btn btn-success" onclick="checkVideoSlot(3, 'real')">Real</button>

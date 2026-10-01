@@ -63,6 +63,10 @@
 
             <li class="menu-item" onclick="switchSection('awareness')">
                 <i class="fa-solid fa-bullhorn"></i><span>Awareness</span>
+                <i class="fa-solid fa-chevron-right menu-indicator"></i>
+            </li>
+            <li class="menu-item" onclick="switchSection('references')">
+                <i class="fa-solid fa-book"></i><span>References</span>
             </li>
             <li class="menu-item" onclick="switchSection('about')">
                 <i class="fa-solid fa-circle-info"></i><span>About Project</span>
@@ -212,7 +216,11 @@
                 </div>
                 <div class="card" onclick="switchSection('video-challenge')">
                     <h3><i class="fa-solid fa-video"></i> Video Challenge</h3>
-                    <p>Interactive video analysis across 3 distinct slots (Real vs. AI).</p>
+                    <p>Interactive video analysis across 3 distinct video clip slots.</p>
+                </div>
+                <div class="card" onclick="switchSection('detection-checklist')">
+                    <h3><i class="fa-solid fa-id-badge"></i> Detection Checklist</h3>
+                    <p>Quick reference field card you can screenshot or download.</p>
                 </div>
                 <div class="card" onclick="switchSection('verification-guide')">
                     <h3><i class="fa-solid fa-list-check"></i> Verification Guide</h3>
@@ -230,9 +238,9 @@
             <div class="card-grid">
                 <!-- Slot 1 -->
                 <div class="card challenge-slot-card">
-                 <div class="mock-image-container" style="padding: 0; overflow: hidden;">
-                    <img src="Face.jpeg" alt="Executive Portrait" style="width: 100%; height: 180px; object-fit: cover; display: block;">
-                 </div>
+                   <div class="mock-image-container" style="padding: 0; overflow: hidden;">
+                        <img src="Face.jpeg" alt="Executive Portrait" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                   </div>
                     <div class="button-group" style="justify-content: center; margin-bottom: 1rem;">
                         <button class="btn btn-success" onclick="checkImageSlot(1, 'real')">Real</button>
                         <button class="btn btn-danger" onclick="checkImageSlot(1, 'fake')">AI Fake</button>
@@ -270,17 +278,17 @@
         <section id="video-challenge" class="content-section">
             <button class="back-btn" onclick="switchSection('spot-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Spot the Fake</button>
             <h2>Video Challenge</h2>
-            <p>Analyze each video sample below. Look for blinking rates, lip-sync delay, and facial lighting. Determine if each video is <strong>Authentic (Real)</strong> or <strong>AI Generated (Fake)</strong>:</p>
+            <p>Play each video clip below. Watch for jawline stitching, blinking rates, and audio sync. Decide if each clip is <strong>Authentic (Real)</strong> or <strong>AI Generated (Fake)</strong>:</p>
             
             <div class="card-grid">
                 <!-- Video Slot 1 -->
                 <div class="card challenge-slot-card">
                     <div class="mock-image-container" style="padding: 0; overflow: hidden; background: #000;">
-                       <video controls preload="metadata" poster="thumbnail1.jpg" style="width: 100%; height: 160px; object-fit: cover; display: block;">
-                           <source src="trumpXputin.mp4" type="video/mp4">
-                       </video>
+                        <video controls preload="metadata" poster="thumbnail1.jpg" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                            <source src="trumpXputin.mp4" type="video/mp4">
+                        </video>
                     </div>
-                    <div class="button-group" style="justify-content: center; margin-bottom: 1rem;">
+                    <div class="button-group" style="justify-content: center; margin-bottom: 1rem; margin-top: 1rem;">
                         <button class="btn btn-success" onclick="checkVideoSlot(1, 'real')">Real</button>
                         <button class="btn btn-danger" onclick="checkVideoSlot(1, 'fake')">AI Fake</button>
                     </div>
@@ -294,7 +302,7 @@
                             <source src="landscapvid.mp4" type="video/mp4">
                         </video>
                     </div>
-                    <div class="button-group" style="justify-content: center; margin-bottom: 1rem;">
+                    <div class="button-group" style="justify-content: center; margin-bottom: 1rem; margin-top: 1rem;">
                         <button class="btn btn-success" onclick="checkVideoSlot(2, 'real')">Real</button>
                         <button class="btn btn-danger" onclick="checkVideoSlot(2, 'fake')">AI Fake</button>
                     </div>
@@ -308,11 +316,31 @@
                             <source src="Planeseat.mp4" type="video/mp4">
                         </video>
                     </div>
-                    <div class="button-group" style="justify-content: center; margin-bottom: 1rem;">
+                    <div class="button-group" style="justify-content: center; margin-bottom: 1rem; margin-top: 1rem;">
                         <button class="btn btn-success" onclick="checkVideoSlot(3, 'real')">Real</button>
                         <button class="btn btn-danger" onclick="checkVideoSlot(3, 'fake')">AI Fake</button>
                     </div>
                     <p id="video-feedback-3" class="slot-feedback" style="font-size: 0.9rem; font-weight: 500; min-height: 40px;"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREENSHOT-FRIENDLY DETECTION CHECKLIST -->
+        <section id="detection-checklist" class="content-section">
+            <button class="back-btn" onclick="switchSection('spot-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Spot the Fake</button>
+            <h2>Deepfake Detection Checklist</h2>
+            <p>Screenshot or download this quick-reference investigator badge for offline analysis:</p>
+            <div class="info-box" style="border: 2px solid var(--accent); background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));">
+                <h3 style="color: var(--accent); margin-bottom: 1rem;"><i class="fa-solid fa-id-badge"></i> Investigator Field Card</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2; color: var(--text-main);">
+                    <li><i class="fa-solid fa-square-check" style="color: var(--success);"></i> <strong>Check the Eyes & Blinks:</strong> Unnatural pauses or robotic blinking frequencies.</li>
+                    <li><i class="fa-solid fa-square-check" style="color: var(--success);"></i> <strong>Inspect Skin & Jawline:</strong> Look for subtle blurring or color blending artifacts.</li>
+                    <li><i class="fa-solid fa-square-check" style="color: var(--success);"></i> <strong>Evaluate Lighting:</strong> Do shadows match environmental light sources?</li>
+                    <li><i class="fa-solid fa-square-check" style="color: var(--success);"></i> <strong>Listen to Audio:</strong> Check for metallic artifacts, room tone drops, or lip-sync delay.</li>
+                    <li><i class="fa-solid fa-square-check" style="color: var(--success);"></i> <strong>Trace the Source:</strong> Can trusted journalism outlets confirm this story?</li>
+                </ul>
+                <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+                    DEEPFAKE DETECTIVE TOOLKIT — VERIFIED REFERENCE CARD
                 </div>
             </div>
         </section>
@@ -333,6 +361,7 @@
             <h2>Interactive Quiz</h2>
             <p>Test your knowledge on deepfakes and AI detection.</p>
             <div class="quiz-box" id="quiz-container">
+                <div id="quiz-progress" style="font-size: 0.85rem; color: var(--accent); margin-bottom: 0.5rem; font-weight: 600;"></div>
                 <h3 id="quiz-question">Loading question...</h3>
                 <div id="quiz-options" class="quiz-options"></div>
                 <button id="next-btn" class="btn" style="margin-top: 1.5rem; display:none;" onclick="nextQuestion()">Next Question</button>
@@ -349,8 +378,8 @@
                     <p>Share your experience encountering deepfakes online.</p>
                 </div>
                 <div class="card" onclick="switchSection('survey-results')">
-                    <h3><i class="fa-solid fa-chart-pie"></i> Results</h3>
-                    <p>View real-time aggregated response statistics.</p>
+                    <h3><i class="fa-solid fa-chart-pie"></i> Results & Charts</h3>
+                    <p>View real-time aggregated response statistics and graphs.</p>
                 </div>
             </div>
         </section>
@@ -470,11 +499,10 @@
 
         <section id="survey-results" class="content-section">
             <button class="back-btn" onclick="switchSection('survey-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Field Survey</button>
-            <h2>Survey Results</h2>
-            <p>Real-time aggregated responses from participants:</p>
+            <h2>Survey Results & Graphs</h2>
+            <p>Real-time visual statistics from community participants:</p>
             <div class="card">
-                <h3>Aggregated Community Statistics:</h3>
-                <div id="result-stats" style="color: var(--text-muted); line-height: 1.8;">
+                <div id="result-stats" style="color: var(--text-muted); line-height: 1.6;">
                     No responses recorded yet. Be the first to submit via the Survey Form!
                 </div>
             </div>
@@ -484,6 +512,48 @@
         <section id="awareness" class="content-section">
             <h2>Awareness & Community Action</h2>
             <p>Help educate friends, family, and colleagues about synthetic media risks by sharing digital literacy guides and practicing safe sharing habits.</p>
+            <div class="card-grid">
+                <div class="card" onclick="switchSection('action-guide')">
+                    <h3><i class="fa-solid fa-shield-halved"></i> Action Guide</h3>
+                    <p>What should I do if I see a suspected deepfake?</p>
+                    <span class="card-link-text">View Steps <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEDICATED ACTION GUIDE SECTION -->
+        <section id="action-guide" class="content-section">
+            <button class="back-btn" onclick="switchSection('awareness')"><i class="fa-solid fa-arrow-left"></i> Back to Awareness</button>
+            <h2>What to Do If You See a Suspected Deepfake</h2>
+            <p>Encountered a piece of synthetic media that looks misleading or malicious? Follow these immediate investigator steps:</p>
+            <div class="card-grid">
+                <div class="card challenge-slot-card">
+                    <h3><i class="fa-solid fa-ban" style="color: var(--danger);"></i> 1. Do Not Share</h3>
+                    <p>Sharing unverified media—even to debunk it—amplifies its reach and feeds algorithmic engagement loops.</p>
+                </div>
+                <div class="card challenge-slot-card">
+                    <h3><i class="fa-solid fa-flag" style="color: var(--accent);"></i> 2. Report to Platform</h3>
+                    <p>Use the platform's reporting tool to flag the content under "Misinformation", "Impersonation", or "Synthetic Media".</p>
+                </div>
+                <div class="card challenge-slot-card">
+                    <h3><i class="fa-solid fa-circle-exclamation" style="color: var(--success);"></i> 3. Inform the Subject</h3>
+                    <p>If a private individual or public entity is being impersonated, notify them or relevant authorities immediately.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- REFERENCES SECTION -->
+        <section id="references" class="content-section">
+            <h2>Sources & References</h2>
+            <p>Academic research, benchmark datasets, and legal analysis underpinning this toolkit:</p>
+            <div class="info-box">
+                <ul style="padding-left: 1.2rem; color: var(--text-muted); line-height: 1.8;">
+                    <li><strong>Deepfake Detection Challenge (DFDC):</strong> Meta, AWS, Microsoft, and academic collaborators benchmark dataset.</li>
+                    <li><strong>ASVspoof Initiative:</strong> Anti-spoofing and synthetic speech detection benchmark frameworks.</li>
+                    <li><strong>The Liar's Dividend:</strong> Professor Robert Chesney & Danielle Citron (Harvard Law Review research on synthetic media and evidentiary skepticism).</li>
+                    <li><strong>Generative Adversarial Nets:</strong> Ian Goodfellow et al., foundational AI generative architecture research (NeurIPS).</li>
+                </ul>
+            </div>
         </section>
 
         <!-- About Project Section -->

@@ -110,10 +110,10 @@ function loadQuiz() {
 
     if (currentQuizIndex < quizData.length) {
         const currentData = quizData[currentQuizIndex];
-        progressEl.innerHTML = `Question ${currentQuizIndex + 1} of ${quizData.length} &bull; Current Score: ${score}`;
-        questionEl.innerHTML = currentData.question;
-        optionsEl.innerHTML = '';
-        nextBtn.style.display = 'none';
+        if (progressEl) progressEl.innerHTML = `Question ${currentQuizIndex + 1} of ${quizData.length} &bull; Current Score: ${score}`;
+        if (questionEl) questionEl.innerHTML = currentData.question;
+        if (optionsEl) optionsEl.innerHTML = '';
+        if (nextBtn) nextBtn.style.display = 'none';
 
         currentData.options.forEach((option, index) => {
             const btn = document.createElement('button');
@@ -123,10 +123,10 @@ function loadQuiz() {
             optionsEl.appendChild(btn);
         });
     } else {
-        progressEl.innerHTML = `Quiz Completed! 🎉`;
-        questionEl.innerHTML = `Final Evaluation Score: ${score} / ${quizData.length}`;
-        optionsEl.innerHTML = `<p style="text-align:center; font-weight:600; color:var(--success);">Great job testing your synthetic media literacy!</p>`;
-        nextBtn.style.display = 'none';
+        if (progressEl) progressEl.innerHTML = `Quiz Completed! 🎉`;
+        if (questionEl) questionEl.innerHTML = `Final Evaluation Score: ${score} / ${quizData.length}`;
+        if (optionsEl) optionsEl.innerHTML = `<p style="text-align:center; font-weight:600; color:var(--success);">Great job testing your synthetic media literacy!</p>`;
+        if (nextBtn) nextBtn.style.display = 'none';
     }
 }
 
@@ -147,7 +147,8 @@ function selectQuizOption(selectedIndex, correctIndex) {
         score++;
     }
 
-    document.getElementById('next-btn').style.display = 'block';
+    const nextBtn = document.getElementById('next-btn');
+    if (nextBtn) nextBtn.style.display = 'block';
 }
 
 function nextQuestion() {
@@ -155,12 +156,7 @@ function nextQuestion() {
     loadQuiz();
 }
 
-// Initialize Quiz on load
-window.onload = function() {
-    loadQuiz();
-};
-
-// Survey submission & visual bar chart generation
+// Survey persistence & email deduplication logic
 let surveyDataSummary = {
     totalSubmissions: 0,
     ages: { "under 18": 0, "18 - 20": 0, "21 - 25": 0, "above 25": 0 },
@@ -173,6 +169,22 @@ let surveyDataSummary = {
     q6: { "Yes": 0, "No": 0, "Not Sure": 0 },
     q7: { "Yes": 0, "No": 0, "Not Sure": 0 }
 };
+
+let submittedEmails = [];
+
+// Load stored survey data and emails on startup
+function loadStoredSurveyData() {
+    const savedData = localStorage.getItem('deepfakeSurveySummary');
+    const savedEmails = localStorage.getItem('deepfakeSubmittedEmails');
+
+    if (savedData) {
+        surveyDataSummary = JSON.parse(savedData);
+    }
+    if (savedEmails) {
+        submittedEmails = JSON.parse(savedEmails);
+    }
+    renderSurveyStats();
+}
 
 function renderBarChart(title, dataObj, total) {
     let html = `<div style="margin-bottom: 1.5rem;"><p style="font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem;">${title}</p>`;
@@ -194,9 +206,35 @@ function renderBarChart(title, dataObj, total) {
     return html;
 }
 
+function renderSurveyStats() {
+    const total = surveyDataSummary.totalSubmissions;
+    const statsEl = document.getElementById('result-stats');
+    if (!statsEl) return;
+
+    if (total === 0) {
+        statsEl.innerHTML = `No responses recorded yet. Be the first to submit via the Survey Form!`;
+        return;
+    }
+
+    statsEl.innerHTML = `
+        <p style="font-size: 1.1rem; font-weight: bold; color: var(--accent); margin-bottom: 1rem;">Total Community Submissions: ${total}</p>
+        <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1rem 0;">
+        ${renderBarChart('Age Demographics', surveyDataSummary.ages, total)}
+        ${renderBarChart('Occupation', surveyDataSummary.occupations, total)}
+        ${renderBarChart('1. Heard of deepfakes?', surveyDataSummary.q1, total)}
+        ${renderBarChart('2. Encountered AI content online?', surveyDataSummary.q2, total)}
+        ${renderBarChart('3. Can identify a deepfake?', surveyDataSummary.q3, total)}
+        ${renderBarChart('4. Checked source of suspicious posts?', surveyDataSummary.q4, total)}
+        ${renderBarChart('5. Most encountered AI content type?', surveyDataSummary.q5, total)}
+        ${renderBarChart('6. Believe deepfakes can be used for scams?', surveyDataSummary.q6, total)}
+        ${renderBarChart('7. Want to learn more about identifying AI?', surveyDataSummary.q7, total)}
+    `;
+}
+
 function submitSurvey(event) {
     event.preventDefault();
     
+    const email = document.getElementById('survey-email').value.trim().toLowerCase();
     const age = document.getElementById('survey-age').value;
     const occupation = document.getElementById('survey-occupation').value;
     const q1 = document.getElementById('survey-q1').value;
@@ -207,7 +245,18 @@ function submitSurvey(event) {
     const q6 = document.getElementById('survey-q6').value;
     const q7 = document.getElementById('survey-q7').value;
 
-    if (age && occupation && q1 && q2 && q3 && q4 && q5 && q6 && q7) {
+    // Check if email has already submitted
+    if (submittedEmails.includes(email)) {
+        alert('⚠️ This email address has already submitted the survey. Each email is allowed only one submission.');
+        return;
+    }
+
+    if (email && age && occupation && q1 && q2 && q3 && q4 && q5 && q6 && q7) {
+        // Record email
+        submittedEmails.push(email);
+        localStorage.setItem('deepfakeSubmittedEmails', JSON.stringify(submittedEmails));
+
+        // Update counts
         surveyDataSummary.totalSubmissions++;
         surveyDataSummary.ages[age]++;
         surveyDataSummary.occupations[occupation]++;
@@ -219,25 +268,19 @@ function submitSurvey(event) {
         surveyDataSummary.q6[q6]++;
         surveyDataSummary.q7[q7]++;
 
+        // Save persistently to localStorage
+        localStorage.setItem('deepfakeSurveySummary', JSON.stringify(surveyDataSummary));
+
         alert('Thank you for submitting your survey response!');
 
-        const total = surveyDataSummary.totalSubmissions;
-        const statsEl = document.getElementById('result-stats');
-        statsEl.innerHTML = `
-            <p style="font-size: 1.1rem; font-weight: bold; color: var(--accent); margin-bottom: 1rem;">Total Community Submissions: ${total}</p>
-            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1rem 0;">
-            ${renderBarChart('Age Demographics', surveyDataSummary.ages, total)}
-            ${renderBarChart('Occupation', surveyDataSummary.occupations, total)}
-            ${renderBarChart('1. Heard of deepfakes?', surveyDataSummary.q1, total)}
-            ${renderBarChart('2. Encountered AI content online?', surveyDataSummary.q2, total)}
-            ${renderBarChart('3. Can identify a deepfake?', surveyDataSummary.q3, total)}
-            ${renderBarChart('4. Checked source of suspicious posts?', surveyDataSummary.q4, total)}
-            ${renderBarChart('5. Most encountered AI content type?', surveyDataSummary.q5, total)}
-            ${renderBarChart('6. Believe deepfakes can be used for scams?', surveyDataSummary.q6, total)}
-            ${renderBarChart('7. Want to learn more about identifying AI?', surveyDataSummary.q7, total)}
-        `;
-
         document.getElementById('community-survey').reset();
+        renderSurveyStats();
         switchSection('survey-results');
     }
 }
+
+// Initialize Quiz and Stored Survey Data on load
+window.onload = function() {
+    loadQuiz();
+    loadStoredSurveyData();
+};

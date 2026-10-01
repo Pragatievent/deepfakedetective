@@ -278,9 +278,8 @@ function submitSurvey(event) {
         switchSection('survey-results');
     }
 }
-
-// Initialize Quiz and Stored Survey Data on load
-window.onload = function() {
+// Initialize Quiz and Stored Survey Data instantly when HTML is ready
+document.addEventListener('DOMContentLoaded', function() {
     loadQuiz();
     loadStoredSurveyData();
-};
+});

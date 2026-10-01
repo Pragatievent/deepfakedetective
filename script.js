@@ -56,15 +56,15 @@ function checkImageSlot(slotNumber, userChoice) {
 
 // Multi-Slot Video Challenge Verification Logic (3 Slots)
 const videoChallengeAnswers = {
-    1: 'fake', // Slot 1: CEO Press Conference (AI Fake)
-    2: 'real', // Slot 2: Live Weather Broadcast (Real)
-    3: 'fake'  // Slot 3: Celebrity Late-Night Interview (AI Fake)
+    1: 'fake', // Clip 1: The Celebrity Face-Swap (AI Fake)
+    2: 'real', // Clip 2: The Robotic Stare / Broadcast (Real)
+    3: 'fake'  // Clip 3: The Audio Delay (AI Fake)
 };
 
 const videoChallengeExplanations = {
-    1: 'Correct! 🎯 Notice the unnatural facial lighting and slight audio lip-sync delay.',
-    2: 'Correct! 🎯 This is an authentic broadcast with natural studio lighting and normal blinking.',
-    3: 'Correct! 🎯 The subject rarely blinks and the jawline shows subtle blending artifacts.'
+    1: 'Correct! 🎯 This is a Face-Swap deepfake. Notice the subtle blurring or skin-tone mismatch along the jawline.',
+    2: 'Correct! 🎯 Well spotted! Natural movement, consistent lighting, textures, and background details indicate that this is real footage.',
+    3: 'Correct! 🎯 Great observation! Small inconsistencies in movement, appearance, lighting, and background can reveal AI-generated content.'
 };
 
 function checkVideoSlot(slotNumber, userChoice) {
@@ -76,11 +76,11 @@ function checkVideoSlot(slotNumber, userChoice) {
         feedbackEl.innerHTML = videoChallengeExplanations[slotNumber];
     } else {
         feedbackEl.style.color = 'var(--danger)';
-        feedbackEl.innerHTML = 'Incorrect. ❌ Pay closer attention to blinking rates and lip-syncing!';
+        feedbackEl.innerHTML = 'Incorrect. ❌ It’s easy to be fooled! AI videos can look realistic. Check faces, movement, hands, lighting, shadows, and frame-to-frame consistency carefully.';
     }
 }
 
-// Interactive Quiz Logic
+// Interactive Quiz Logic with Score & Progress Tracking
 const quizData = [
     {
         question: "What neural network architecture is most commonly associated with generating realistic fake faces?",
@@ -103,13 +103,15 @@ let currentQuizIndex = 0;
 let score = 0;
 
 function loadQuiz() {
+    const progressEl = document.getElementById('quiz-progress');
     const questionEl = document.getElementById('quiz-question');
     const optionsEl = document.getElementById('quiz-options');
     const nextBtn = document.getElementById('next-btn');
 
     if (currentQuizIndex < quizData.length) {
         const currentData = quizData[currentQuizIndex];
-        questionEl.innerHTML = `Question ${currentQuizIndex + 1}: ${currentData.question}`;
+        progressEl.innerHTML = `Question ${currentQuizIndex + 1} of ${quizData.length} &bull; Current Score: ${score}`;
+        questionEl.innerHTML = currentData.question;
         optionsEl.innerHTML = '';
         nextBtn.style.display = 'none';
 
@@ -121,8 +123,9 @@ function loadQuiz() {
             optionsEl.appendChild(btn);
         });
     } else {
-        questionEl.innerHTML = `Quiz Completed! 🎉`;
-        optionsEl.innerHTML = `<p>Your Score: ${score} out of ${quizData.length}</p>`;
+        progressEl.innerHTML = `Quiz Completed! 🎉`;
+        questionEl.innerHTML = `Final Evaluation Score: ${score} / ${quizData.length}`;
+        optionsEl.innerHTML = `<p style="text-align:center; font-weight:600; color:var(--success);">Great job testing your synthetic media literacy!</p>`;
         nextBtn.style.display = 'none';
     }
 }
@@ -157,7 +160,7 @@ window.onload = function() {
     loadQuiz();
 };
 
-// Survey submission & aggregated results handling
+// Survey submission & visual bar chart generation
 let surveyDataSummary = {
     totalSubmissions: 0,
     ages: { "under 18": 0, "18 - 20": 0, "21 - 25": 0, "above 25": 0 },
@@ -170,6 +173,26 @@ let surveyDataSummary = {
     q6: { "Yes": 0, "No": 0, "Not Sure": 0 },
     q7: { "Yes": 0, "No": 0, "Not Sure": 0 }
 };
+
+function renderBarChart(title, dataObj, total) {
+    let html = `<div style="margin-bottom: 1.5rem;"><p style="font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem;">${title}</p>`;
+    for (let key in dataObj) {
+        let count = dataObj[key];
+        let pct = total > 0 ? Math.round((count / total) * 100) : 0;
+        html += `
+            <div style="margin-bottom: 0.3rem; font-size: 0.85rem;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
+                    <span>${key}</span><span>${count} (${pct}%)</span>
+                </div>
+                <div class="chart-bar-container">
+                    <div class="chart-bar-fill" style="width: ${pct}%;"></div>
+                </div>
+            </div>
+        `;
+    }
+    html += `</div>`;
+    return html;
+}
 
 function submitSurvey(event) {
     event.preventDefault();
@@ -198,21 +221,20 @@ function submitSurvey(event) {
 
         alert('Thank you for submitting your survey response!');
 
+        const total = surveyDataSummary.totalSubmissions;
         const statsEl = document.getElementById('result-stats');
         statsEl.innerHTML = `
-            <p><strong>Total Submissions:</strong> ${surveyDataSummary.totalSubmissions}</p>
+            <p style="font-size: 1.1rem; font-weight: bold; color: var(--accent); margin-bottom: 1rem;">Total Community Submissions: ${total}</p>
             <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1rem 0;">
-            <p><strong>Demographics Breakdown:</strong><br>
-            • Age: Under 18 (${surveyDataSummary.ages["under 18"]}) | 18-20 (${surveyDataSummary.ages["18 - 20"]}) | 21-25 (${surveyDataSummary.ages["21 - 25"]}) | Above 25 (${surveyDataSummary.ages["above 25"]})<br>
-            • Occupation: Student (${surveyDataSummary.occupations["Student"]}) | Working (${surveyDataSummary.occupations["Working"]}) | Other (${surveyDataSummary.occupations["Other"]})</p>
-            
-            <p><strong>1. Heard of deepfakes:</strong> Yes (${surveyDataSummary.q1.Yes}) | No (${surveyDataSummary.q1.No}) | Not Sure (${surveyDataSummary.q1["Not Sure"]})</p>
-            <p><strong>2. Encountered AI content:</strong> Yes (${surveyDataSummary.q2.Yes}) | No (${surveyDataSummary.q2.No}) | Not Sure (${surveyDataSummary.q2["Not Sure"]})</p>
-            <p><strong>3. Can identify a deepfake:</strong> Yes (${surveyDataSummary.q3.Yes}) | No (${surveyDataSummary.q3.No}) | Not Sure (${surveyDataSummary.q3["Not Sure"]})</p>
-            <p><strong>4. Checked source of suspicious post:</strong> Yes (${surveyDataSummary.q4.Yes}) | No (${surveyDataSummary.q4.No}) | Not Sure (${surveyDataSummary.q4["Not Sure"]})</p>
-            <p><strong>5. Most encountered type:</strong> Image (${surveyDataSummary.q5.Image}) | Audio (${surveyDataSummary.q5.Audio}) | Text (${surveyDataSummary.q5.Text}) | Not Sure (${surveyDataSummary.q5["Not Sure"]})</p>
-            <p><strong>6. Deepfakes used for scams:</strong> Yes (${surveyDataSummary.q6.Yes}) | No (${surveyDataSummary.q6.No}) | Not Sure (${surveyDataSummary.q6["Not Sure"]})</p>
-            <p><strong>7. Want to learn more:</strong> Yes (${surveyDataSummary.q7.Yes}) | No (${surveyDataSummary.q7.No}) | Not Sure (${surveyDataSummary.q7["Not Sure"]})</p>
+            ${renderBarChart('Age Demographics', surveyDataSummary.ages, total)}
+            ${renderBarChart('Occupation', surveyDataSummary.occupations, total)}
+            ${renderBarChart('1. Heard of deepfakes?', surveyDataSummary.q1, total)}
+            ${renderBarChart('2. Encountered AI content online?', surveyDataSummary.q2, total)}
+            ${renderBarChart('3. Can identify a deepfake?', surveyDataSummary.q3, total)}
+            ${renderBarChart('4. Checked source of suspicious posts?', surveyDataSummary.q4, total)}
+            ${renderBarChart('5. Most encountered AI content type?', surveyDataSummary.q5, total)}
+            ${renderBarChart('6. Believe deepfakes can be used for scams?', surveyDataSummary.q6, total)}
+            ${renderBarChart('7. Want to learn more about identifying AI?', surveyDataSummary.q7, total)}
         `;
 
         document.getElementById('community-survey').reset();

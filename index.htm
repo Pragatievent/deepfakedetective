@@ -368,126 +368,140 @@
             </div>
         </section>
 
-        <!-- ================= FIELD SURVEY HUB & TOPICS ================= -->
+       <!-- ================= FIELD SURVEY HUB & TOPICS ================= -->
+        <section id="survey-hub" class="content-section">
+            <h2>Field Survey</h2>
+            <p>Contribute to our community research on deepfake awareness and view live aggregated results.</p>
+            <div class="card-grid">
+                <div class="card" onclick="switchSection('survey-form')">
+                    <h3><i class="fa-solid fa-square-poll-horizontal"></i> Survey Form</h3>
+                    <p>Share your experience encountering deepfakes online.</p>
+                </div>
+                <div class="card" onclick="switchSection('survey-results')">
+                    <h3><i class="fa-solid fa-chart-pie"></i> Results & Graphs</h3>
+                    <p>View real-time aggregated response statistics and graphs.</p>
+                </div>
+            </div>
+        </section>
+
         <section id="survey-form" class="content-section">
-    <button class="back-btn" onclick="switchSection('survey-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Field Survey</button>
-    <h2>Field Survey</h2>
-    <p>Please complete our research survey on deepfake awareness:</p>
-    <div class="survey-box">
-        <form id="community-survey" onsubmit="submitSurvey(event)">
-            <!-- Email Field for One-Time Submission -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 600;">Email Address:</label>
-                <input type="email" id="survey-email" class="form-select" placeholder="Enter your email to submit..." required>
+            <button class="back-btn" onclick="switchSection('survey-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Field Survey</button>
+            <h2>Field Survey</h2>
+            <p>Please complete our research survey on deepfake awareness:</p>
+            <div class="survey-box">
+                <form id="community-survey" onsubmit="submitSurvey(event)">
+                    <!-- Email Field for One-Time Submission -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 600;">Email Address:</label>
+                        <input type="email" id="survey-email" class="form-select" placeholder="Enter your email to submit..." required>
+                    </div>
+
+                    <!-- Demographics -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 600;">Age:</label>
+                        <select id="survey-age" class="form-select" required>
+                            <option value="">Select Age Group...</option>
+                            <option value="under 18">Under 18</option>
+                            <option value="18 - 20">18 - 20</option>
+                            <option value="21 - 25">21 - 25</option>
+                            <option value="above 25">Above 25</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 600;">Occupation:</label>
+                        <select id="survey-occupation" class="form-select" required>
+                            <option value="">Select Occupation...</option>
+                            <option value="Student">Student</option>
+                            <option value="Working">Working</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
+
+                    <!-- Q1 -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">1. Have you heard of deepfakes?</label>
+                        <select id="survey-q1" class="form-select" required>
+                            <option value="">Select an option...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not Sure">Not Sure</option>
+                        </select>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">2. Have you encountered AI-generated content online?</label>
+                        <select id="survey-q2" class="form-select" required>
+                            <option value="">Select an option...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not Sure">Not Sure</option>
+                        </select>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">3. Do you think you can identify a deepfake?</label>
+                        <select id="survey-q3" class="form-select" required>
+                            <option value="">Select an option...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not Sure">Not Sure</option>
+                        </select>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">4. Have you ever checked the source of a suspicious post?</label>
+                        <select id="survey-q4" class="form-select" required>
+                            <option value="">Select an option...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not Sure">Not Sure</option>
+                        </select>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">5. Which type of AI-generated content do you encounter most often?</label>
+                        <select id="survey-q5" class="form-select" required>
+                            <option value="">Select content type...</option>
+                            <option value="Image">Image</option>
+                            <option value="Audio">Audio</option>
+                            <option value="Text">Text</option>
+                            <option value="Not Sure">Not Sure</option>
+                        </select>
+                    </div>
+
+                    <!-- Q6 -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">6. Do you think deepfakes can be used for scams?</label>
+                        <select id="survey-q6" class="form-select" required>
+                            <option value="">Select an option...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not Sure">Not Sure</option>
+                        </select>
+                    </div>
+
+                    <!-- Q7 -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">7. Would you like to learn more about identifying misleading AI content?</label>
+                        <select id="survey-q7" class="form-select" required>
+                            <option value="">Select an option...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not Sure">Not Sure</option>
+                        </select>
+                    </div>
+
+                    <button class="btn" type="submit" style="width: 100%;">Submit Response</button>
+                </form>
             </div>
-
-            <!-- Demographics -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 600;">Age:</label>
-                <select id="survey-age" class="form-select" required>
-                    <option value="">Select Age Group...</option>
-                    <option value="under 18">Under 18</option>
-                    <option value="18 - 20">18 - 20</option>
-                    <option value="21 - 25">21 - 25</option>
-                    <option value="above 25">Above 25</option>
-                </select>
-            </div>
-
-            <div style="margin-bottom: 1.5rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 600;">Occupation:</label>
-                <select id="survey-occupation" class="form-select" required>
-                    <option value="">Select Occupation...</option>
-                    <option value="Student">Student</option>
-                    <option value="Working">Working</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-
-            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
-
-            <!-- Q1 -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">1. Have you heard of deepfakes?</label>
-                <select id="survey-q1" class="form-select" required>
-                    <option value="">Select an option...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <!-- Q2 -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">2. Have you encountered AI-generated content online?</label>
-                <select id="survey-q2" class="form-select" required>
-                    <option value="">Select an option...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <!-- Q3 -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">3. Do you think you can identify a deepfake?</label>
-                <select id="survey-q3" class="form-select" required>
-                    <option value="">Select an option...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <!-- Q4 -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">4. Have you ever checked the source of a suspicious post?</label>
-                <select id="survey-q4" class="form-select" required>
-                    <option value="">Select an option...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <!-- Q5 -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">5. Which type of AI-generated content do you encounter most often?</label>
-                <select id="survey-q5" class="form-select" required>
-                    <option value="">Select content type...</option>
-                    <option value="Image">Image</option>
-                    <option value="Audio">Audio</option>
-                    <option value="Text">Text</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <!-- Q6 -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">6. Do you think deepfakes can be used for scams?</label>
-                <select id="survey-q6" class="form-select" required>
-                    <option value="">Select an option...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <!-- Q7 -->
-            <div style="margin-bottom: 1.5rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">7. Would you like to learn more about identifying misleading AI content?</label>
-                <select id="survey-q7" class="form-select" required>
-                    <option value="">Select an option...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <button class="btn" type="submit" style="width: 100%;">Submit Response</button>
-        </form>
-    </div>
-</section>
-
+        </section>
         <section id="survey-results" class="content-section">
             <button class="back-btn" onclick="switchSection('survey-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Field Survey</button>
             <h2>Survey Results & Graphs</h2>

@@ -327,6 +327,22 @@ p {
     font-size: 1rem;
 }
 
+/* Survey Bar Charts */
+.chart-bar-container {
+    background-color: var(--bg-primary);
+    border-radius: 4px;
+    height: 10px;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.chart-bar-fill {
+    background-color: var(--accent);
+    height: 100%;
+    transition: width 0.4s ease;
+}
+
 /* ================= RESPONSIVE MOBILE VIEW (Up to 1024px) ================= */
 @media (max-width: 1024px) {
     .mobile-topbar {
